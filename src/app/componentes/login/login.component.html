@@ -1,6 +1,7 @@
 <div class="parentDiv">
-    <div >
-        <div class="row">
+    <div class="mt-4" style="justify-content: center; align-self: center; align-content: center; align-items: center;">
+        <div style="border: 1px solid #d3d3d3; justify-content: center; align-self: center; align-content: center; align-items: center;
+        padding: 16px;">
             <div>
                 <label for="username">Usuario</label><br>
                 <input type="text" id="username" name="username" [(ngModel)]="usuario.nombre" autocomplete="off" required >
@@ -9,8 +10,8 @@
                 <label for="password">Contraseña</label><br>
                 <input type="password" id="password" name="password" [(ngModel)]="usuario.password" required >
             </div>
+            <button style="margin-left: auto;" class="btn btn-success mt-2" type="submit" (click)="ingresar()">Ingresar</button>
         </div>
-        <button class="btn btn-success mt-2" type="submit" (click)="ingresar()">Ingresar</button>
     </div>
 </div>
 

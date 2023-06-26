@@ -56,5 +56,11 @@ export class CarritoService {
       }
     }
   }
-  
+
+  public ClearCart() {
+    if (confirm("Estas seguro de vaciar el carrito?")) {
+      this.carrito = [];
+      localStorage.setItem("carrito", JSON.stringify(this.carrito));
+    }
+  }
 }

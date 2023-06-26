@@ -32,4 +32,9 @@ export class CarritoComponent {
     this.totales = this.carrito.map(x => x.cantidad * x.producto.precio);
     this.total = this.totales.reduce((total, valor) => total + valor, 0);
   }
+
+  public VaciarCarrito(){
+    this.carritoService.ClearCart();
+    location.reload();
+  }
 }

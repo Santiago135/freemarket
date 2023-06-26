@@ -37,7 +37,7 @@
     font-weight: bold;
 }
 
-.botonAdd{
+.botonAdd {
     border: 1px solid #27ae60;
     border-radius: 4px;
     width: 20px;
@@ -53,7 +53,7 @@
     transition: background-color 0.5s ease;
 }
 
-.focusColorAdd:hover{
+.focusColorAdd:hover {
     background-color: #00702f;
     color: white
 }
@@ -62,12 +62,12 @@
     transition: background-color 0.5s ease;
 }
 
-.focusColorRemove:hover{
+.focusColorRemove:hover {
     background-color: #ae7f27;
     color: white
 }
 
-.botonRemove{
+.botonRemove {
     border: 1px solid #ae7f27;
     border-radius: 4px;
     width: 20px;
@@ -77,6 +77,15 @@
     font-weight: bold;
     cursor: pointer;
     margin-left: 5px;
+}
+
+
+.vaciarCarrito {
+    transition: border-color 0.5s ease;
+}
+
+.vaciarCarrito:hover {
+    border: 1px solid #00702f
 }
 
 .carrito-table td.total {
@@ -91,4 +100,13 @@
 
 .carrito-table td:last-child {
     text-align: right;
+}
+
+.clearCart {
+    cursor: pointer;
+    border: 2px solid rgb(0, 255, 149);
+    transition: background-color 0.5s ease;
+}
+.clearCart:hover{
+    background-color: rgb(80, 245, 223)
 }

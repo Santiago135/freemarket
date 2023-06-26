@@ -1,11 +1,11 @@
 <div class="container" style="margin-top: 10px;">
     <table class="carrito-table" *ngIf="this.total > 0">
         <thead>
-            <tr>
+            <tr style="background-color: #05c988;">
                 <th class="green-bg">Producto</th>
                 <th class="blue-bg">Precio</th>
                 <th class="orange-bg">Cantidad</th>
-                <th class="purple-bg">Total</th>
+                <th colspan="3" style="float: right;" class="purple-bg">Total</th>
             </tr>
         </thead>
         <tbody>
@@ -19,13 +19,13 @@
                         <div class="botonAdd focusColorAdd" (click)="AddItem(item.producto)">+</div>
                     </div>
                 </td>
-                <td class="total" style="display: flex; justify-content: start;">${{ item.producto.precio *
+                <td class="total" style="display: flex; justify-content: end;">${{ item.producto.precio *
                     item.cantidad | showPrice}}</td>
             </tr>
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="3"></td>
+                <td colspan="3"><button class="btn clearCart" (click)="VaciarCarrito()">Vaciar</button></td>
                 <td class="totalTotal" style="font-weight: bold;">Total: ${{ this.total | showPrice }}</td>
             </tr>
         </tfoot>
