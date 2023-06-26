@@ -1,0 +1,20 @@
+<div class="parentDiv">
+    <div >
+        <div class="row">
+            <div>
+                <label for="username">Usuario</label><br>
+                <input type="text" id="username" name="username" [(ngModel)]="usuario.nombre" autocomplete="off" required >
+            </div>
+            <div class="mt-2">
+                <label for="password">Contraseña</label><br>
+                <input type="password" id="password" name="password" [(ngModel)]="usuario.password" required >
+            </div>
+        </div>
+        <button class="btn btn-success mt-2" type="submit" (click)="ingresar()">Ingresar</button>
+    </div>
+</div>
+
+<router-outlet></router-outlet>
+<div *ngIf="ingresado">
+    Bienvenido
+</div>

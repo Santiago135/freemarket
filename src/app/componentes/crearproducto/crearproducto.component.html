@@ -1,0 +1,23 @@
+<form class="product-form cuadroCrearProducto" style="margin-top: 5%;">
+    <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input [(ngModel)]="producto.nombre" class="focusColor" type="text" id="nombre" name="nombre" required autocomplete="off" style="outline: none;">
+    </div>
+    <div class="form-group">
+        <label for="precio">Precio:</label>
+        <input [(ngModel)]="producto.precio" class="focusColor" type="number" id="precio" name="precio" required autocomplete="off" style="outline: none;">
+    </div>
+    <div class="form-group">
+        <label for="categoria">Categoría:</label>
+        <select [(ngModel)]="producto.categoria" class="focusColor" id="categoria" name="categoria" required style="outline: none;">
+            <option value="">Seleccione una categoría</option>
+            <option *ngFor="let cat of categorias" [value]="cat.id">{{cat.nombre}}</option>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label for="imagen">Link imagen:</label>
+        <input [(ngModel)]="producto.imagen" class="focusColor" type="text" id="imagen" name="imagen" required autocomplete="off" style="outline: none;">
+    </div>
+    <input type="button" class="btn btn-info" value="Guardar" style="color: white"  (click)="CrearProducto()" />
+</form>

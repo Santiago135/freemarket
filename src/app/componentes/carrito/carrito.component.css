@@ -1,0 +1,94 @@
+.carrito-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.carrito-table th,
+.carrito-table td {
+    padding: 12px;
+    text-align: left;
+}
+
+.carrito-table th {
+    background-color: #05c988;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.carrito-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.carrito-table tbody tr:hover {
+    background-color: #e9e9e9;
+}
+
+.carrito-table td.producto {
+    font-weight: bold;
+}
+
+.carrito-table td.precio {
+    color: #2ba2c0;
+    font-weight: bold;
+}
+
+.carrito-table td.cantidad {
+    color: #8ec905;
+    font-weight: bold;
+}
+
+.botonAdd{
+    border: 1px solid #27ae60;
+    border-radius: 4px;
+    width: 20px;
+    display: flex;
+    justify-content: center;
+    color: #27ae60;
+    font-weight: bold;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.focusColorAdd {
+    transition: background-color 0.5s ease;
+}
+
+.focusColorAdd:hover{
+    background-color: #00702f;
+    color: white
+}
+
+.focusColorRemove {
+    transition: background-color 0.5s ease;
+}
+
+.focusColorRemove:hover{
+    background-color: #ae7f27;
+    color: white
+}
+
+.botonRemove{
+    border: 1px solid #ae7f27;
+    border-radius: 4px;
+    width: 20px;
+    display: flex;
+    justify-content: center;
+    color: #ae7f27;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.carrito-table td.total {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.carrito-table td.totalTotal {
+    color: #2756ae;
+    font-weight: bold;
+}
+
+.carrito-table td:last-child {
+    text-align: right;
+}

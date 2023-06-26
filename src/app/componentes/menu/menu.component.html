@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-lg navbar-primary" style="background: linear-gradient(#64ace6, #91e5aa);">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <label class="nav-link" style="color: white; font-weight: bold;">Free Market</label>
+        </li>
+        <li class="nav-item" *ngIf="authGuard.salida">
+            <a class="nav-link" routerLink="home">Home</a>
+        </li>
+        <li class="nav-item" *ngIf="!authGuard.salida" appLogbutton [col]="'green'">
+            <a class="nav-link" routerLink="login">Login</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" *ngIf="!authGuard.salida" routerLink="registrar" appLogbutton [col]="'yellow'">Registrarse</a>
+        </li>
+        <li class="nav-item" *ngIf="authGuard.salida">
+            <a class="nav-link" routerLink="productos">Productos</a>
+        </li>
+        <li class="nav-item" *ngIf="authGuard.salida">
+            <a class="nav-link" routerLink="usuarios">Usuarios</a>
+        </li>
+        <li class="nav-item" *ngIf="authGuard.salida">
+            <a class="nav-link" routerLink="aboutme">About me</a>
+        </li>
+        <li class="nav-item" style="float: right;"  *ngIf="authGuard.salida" appLogbutton [col]="'red'">
+            <a class="nav-link" style="cursor: pointer;" (click)="logOut()" >Cerrar sesion</a>
+        </li>
+        
+    </ul>
+</nav>

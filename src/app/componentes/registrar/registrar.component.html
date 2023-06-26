@@ -1,0 +1,53 @@
+<div class="parentDiv">
+    <div>
+        <div class="row">
+            <div>
+                <label for="username">Usuario</label><br>
+                <input type="text" name="username" [(ngModel)]="usuario.nombre" autocomplete="off" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="mt-2">
+                <label for="password">Contraseña</label><br>
+                <input type="password" name="password" [(ngModel)]="usuario.password" required appLengthchecker  >
+            </div>
+        </div>
+        <div class="row">
+            <div class="mt-2">
+                <label for="password">Repetir contraseña</label><br>
+                <input type="password" name="password2" [(ngModel)]="password2" required appValidateSamePasswords [pass]="usuario.password">
+            </div>
+        </div>
+        <div class="row">
+            <div class="mt-2">
+                <label for="password">Direccion</label><br>
+                <input type="text" name="direccion" [(ngModel)]="usuario.direccion" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="mt-2">
+                <label for="password">Imagen url</label><br>
+                <input type="text" name="imagen" [(ngModel)]="usuario.imagen" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="mt-2">
+                <label for="password">Fecha nacimiento</label><br>
+                <input type="date" name="fechaNac" [(ngModel)]="usuario.fechaNac" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="mt-2">
+                <label for="password">Dni</label><br>
+                <input type="number" name="dni" [(ngModel)]="usuario.dni" required>
+            </div>
+        </div>
+        <div class="row" *ngIf="usuario.password == password2 && usuario.password != ''">
+            <div class="offset-2">
+                <input type="button" [disabled]="usuario.nombre == '' || usuario.password == ''" class="btn btn-danger"
+                    value="Registrar" (click)="registrar()">
+            </div>
+        </div>
+    </div>
+
+</div>

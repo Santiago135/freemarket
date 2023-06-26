@@ -1,0 +1,11 @@
+:host {
+    display: block;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Asegura que el componente esté detrás de otros elementos */
+    background: url("../../../assets/404pageimage.png") no-repeat center center fixed;
+    background-size: cover;
+    overflow: hidden;
+  }
