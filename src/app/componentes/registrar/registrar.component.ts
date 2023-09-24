@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { LengthcheckerDirective } from "../../directivas/lengthchecker.directive";
 import { HttpClient } from '@angular/common/http';
 import { CheckIfIsLogged } from 'src/app/generics/checkIfIsLogged';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-registrar',
@@ -15,23 +16,26 @@ export class RegistrarComponent {
   public password2 = "";
   private errorMessage = "No puede estar en blanco: ";
   private empties = "";
-  public registrar() {
+  public async registrar() {
     if(!this.checkInputs()){
       alert(this.errorMessage + this.empties)
     }
     else{
-      this.http.post<any>("http://localhost:7200/register", this.usuario)
-      .subscribe(data => {
-        if (data.success) {
-          alert("Usuario creado con exito!");
-          if(!CheckIfIsLogged()){
-            this.route.navigateByUrl("login");
-          }
-        }
-        else {
-          alert(data.message);
-        }
-      });
+
+      const response = await this.userService.addUsuario(this.usuario);
+      console.log(response);
+      // this.http.post<any>("http://localhost:7200/register", this.usuario)
+      // .subscribe(data => {
+      //   if (data.success) {
+      //     alert("Usuario creado con exito!");
+      //     if(!CheckIfIsLogged()){
+      //       this.route.navigateByUrl("login");
+      //     }
+      //   }
+      //   else {
+      //     alert(data.message);
+      //   }
+      // });
     }
   }
 
@@ -68,7 +72,7 @@ export class RegistrarComponent {
     return isOk;
   }
 
-  constructor(public route: Router, public http: HttpClient) {
+  constructor(public http: HttpClient, private userService: UsuariosService) {
   }
 
 }

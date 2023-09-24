@@ -26,6 +26,9 @@ import { CategoryToStringPipe } from './pipes/category-to-string.pipe';
 import { ModifyProductComponent } from './componentes/modify-product/modify-product.component';
 import { CarritoComponent } from './componentes/carrito/carrito.component';
 import { AboutmeComponent } from './componentes/aboutme/aboutme.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -56,7 +59,9 @@ import { AboutmeComponent } from './componentes/aboutme/aboutme.component';
     FormsModule,
     NgbModule,
     HttpClientModule,
-    CommonModule
+    CommonModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore())
   ],
   providers: [],
   bootstrap: [AppComponent]

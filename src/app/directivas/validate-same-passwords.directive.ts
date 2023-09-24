@@ -14,7 +14,7 @@ export class ValidateSamePasswordsDirective {
       this.el.nativeElement.style.border = "1px solid red"
     }
     else{
-      this.el.nativeElement.style.border = "1px solid black";
+      this.el.nativeElement.style.border = "1px solid #ccc";
     }
   }
 

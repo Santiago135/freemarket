@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "freemarketapp-4d20f"
+  },
+  "targets": {
+    "freemarketapp-4d20f": {
+      "hosting": {
+        "programacion3": [
+          "freemarketapp-4d20f"
+        ]
+      }
+    }
+  }
+}

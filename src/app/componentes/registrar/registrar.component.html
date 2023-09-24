@@ -1,53 +1,65 @@
 <div class="parentDiv">
-    <div>
+    <div class="login-container">
+        <h2 style="color: white; font-weight: bold;">Registro</h2>
         <div class="row">
-            <div>
-                <label for="username">Usuario</label><br>
+            <div class="col-md-6">
+                <label for="username" style="color: white; font-weight: bold;">Usuario</label>
+            </div>
+            <div class="col-md-6">
+                <label for="password" style="color: white; font-weight: bold;">Contraseña</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
                 <input type="text" name="username" [(ngModel)]="usuario.nombre" autocomplete="off" required>
             </div>
-        </div>
-        <div class="row">
-            <div class="mt-2">
-                <label for="password">Contraseña</label><br>
-                <input type="password" name="password" [(ngModel)]="usuario.password" required appLengthchecker  >
+            <div class="col-md-6">
+                <input type="password" name="password" [(ngModel)]="usuario.password" required
+                    appLengthchecker>
             </div>
         </div>
         <div class="row">
-            <div class="mt-2">
-                <label for="password">Repetir contraseña</label><br>
-                <input type="password" name="password2" [(ngModel)]="password2" required appValidateSamePasswords [pass]="usuario.password">
+            <div class="col-md-6">
+                <label style="color: white; font-weight: bold;" for="password2">Repetir contraseña</label>
+            </div>
+            <div class="col-md-6">
+                <label style="color: white; font-weight: bold;" for="direccion">Direccion</label>
             </div>
         </div>
         <div class="row">
-            <div class="mt-2">
-                <label for="password">Direccion</label><br>
-                <input type="text" name="direccion" [(ngModel)]="usuario.direccion" required>
+            <div class="col-md-6">
+                <input  type="password" name="password2" [(ngModel)]="password2" required appValidateSamePasswords
+                    [pass]="usuario.password">
+            </div>
+            <div class="col-md-6">
+                <input  type="text" name="direccion" [(ngModel)]="usuario.direccion" required autocomplete="off">
             </div>
         </div>
         <div class="row">
-            <div class="mt-2">
-                <label for="password">Imagen url</label><br>
-                <input type="text" name="imagen" [(ngModel)]="usuario.imagen" required>
+            <div class="col-md-6">
+                <label style="color: white; font-weight: bold;" for="imagen">Imagen URL</label>
+            </div>
+            <div class="col-md-6">
+                <label style="color: white; font-weight: bold;" for="fechaNac">Fecha de Nacimiento</label>
             </div>
         </div>
         <div class="row">
-            <div class="mt-2">
-                <label for="password">Fecha nacimiento</label><br>
-                <input type="date" name="fechaNac" [(ngModel)]="usuario.fechaNac" required>
+            <div class="col-md-6">
+                <input  type="text" name="imagen" [(ngModel)]="usuario.imagen" required autocomplete="off">
+            </div>
+            <div class="col-md-6">
+                <input type="date" name="fechaNac" [(ngModel)]="usuario.fechaNac" required autocomplete="off">
             </div>
         </div>
         <div class="row">
-            <div class="mt-2">
-                <label for="password">Dni</label><br>
-                <input type="number" name="dni" [(ngModel)]="usuario.dni" required>
-            </div>
+            <label style="color: white; font-weight: bold; display: flex; justify-content: center;" for="dni">DNI</label>
+        </div>
+        <div class="row">
+            <input type="number" name="dni" [(ngModel)]="usuario.dni" required autocomplete="off">
         </div>
         <div class="row" *ngIf="usuario.password == password2 && usuario.password != ''">
-            <div class="offset-2">
-                <input type="button" [disabled]="usuario.nombre == '' || usuario.password == ''" class="btn btn-danger"
-                    value="Registrar" (click)="registrar()">
-            </div>
+            <input type="button" [disabled]="usuario.nombre == '' || usuario.password == ''" class="btn btn-danger"
+                value="Registrar" (click)="registrar()">
         </div>
     </div>
-
 </div>

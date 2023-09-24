@@ -1,35 +1,41 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from '../../entidades/usuario';
 import { LoggedUser } from '../../entidades/logged-user';
 import { HttpClient } from '@angular/common/http';
 import { AuthGuardGuard } from 'src/app/Guard/auth-guard.guard';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+  usuarios: Usuario[] = [];
   public usuario: Usuario = new Usuario();
-  public ingresado = false;
+  public wrongUser = false;
   public ingresar() {
-    this.http.post<any>("http://localhost:7200/login", this.usuario)
-      .subscribe(data => {
-        if(data.success){
-          var usuario = data.data;
-          sessionStorage.setItem('UsuarioLogueado', JSON.stringify(usuario));
-          this.token.salida = true;
-          this.route.navigateByUrl("home");
-        }
-        else{
-          alert(data.message);
-        }
-      });
+    let user = this.usuarios.find(x => x.nombre == this.usuario.nombre && x.password == this.usuario.password);
+    if (user == undefined) {
+      this.wrongUser = true;
+    }
+    else {
+      sessionStorage.setItem('UsuarioLogueado', JSON.stringify(user));
+      this.token.salida = true;
+      this.route.navigateByUrl("home");
+    }
   }
 
-constructor(public route: Router, 
-  public token:AuthGuardGuard, public http:HttpClient) {
-}
+  clearMessage(){
+    this.wrongUser = false;
+  }
+
+  constructor(public route: Router,
+    public token: AuthGuardGuard, public http: HttpClient, private userServices: UsuariosService) {
+  }
+  ngOnInit(): void {
+    this.userServices.getUsuarios().subscribe(usuarios => this.usuarios = usuarios)
+  }
 
 }
