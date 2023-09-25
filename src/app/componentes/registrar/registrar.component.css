@@ -4,9 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: -75px;
-    width: 99%;
+    margin-top: 30px;
 }
 
 .login-container {
