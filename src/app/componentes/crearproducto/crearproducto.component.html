@@ -1,23 +1,33 @@
 <form class="product-form cuadroCrearProducto" style="margin-top: 5%;">
     <div class="form-group">
         <label for="nombre">Nombre:</label>
-        <input [(ngModel)]="producto.nombre" class="focusColor" type="text" id="nombre" name="nombre" required autocomplete="off" style="outline: none;">
+        <input [(ngModel)]="producto.nombre" (ngModelChange)="clearErrorMessage(); clearSuccesMessage()" class="focusColor" type="text"
+        id="nombre" name="nombre" required autocomplete="off" style="outline: none;">
     </div>
     <div class="form-group">
         <label for="precio">Precio:</label>
-        <input [(ngModel)]="producto.precio" class="focusColor" type="number" id="precio" name="precio" required autocomplete="off" style="outline: none;">
+        <input [(ngModel)]="producto.precio" (ngModelChange)="clearErrorMessage(); clearSuccesMessage()" class="focusColor" type="number"
+        id="precio" name="precio" required autocomplete="off" style="outline: none;">
     </div>
     <div class="form-group">
         <label for="categoria">Categoría:</label>
-        <select [(ngModel)]="producto.categoria" class="focusColor" id="categoria" name="categoria" required style="outline: none;">
-            <option value="">Seleccione una categoría</option>
-            <option *ngFor="let cat of categorias" [value]="cat.id">{{cat.nombre}}</option>
-        </select>
-    </div>
-    
-    <div class="form-group">
-        <label for="imagen">Link imagen:</label>
-        <input [(ngModel)]="producto.imagen" class="focusColor" type="text" id="imagen" name="imagen" required autocomplete="off" style="outline: none;">
-    </div>
-    <input type="button" class="btn btn-info" value="Guardar" style="color: white"  (click)="CrearProducto()" />
+        <select [(ngModel)]="producto.categoria" (ngModelChange)="clearErrorMessage(); clearSuccesMessage()" class="focusColor" id="categoria"
+        name="categoria" required style="outline: none;">
+        <option value="">Seleccione una categoría</option>
+        <option *ngFor="let cat of categorias" [value]="cat.id">{{cat.nombre}}</option>
+    </select>
+</div>
+
+<div class="form-group">
+    <label for="imagen">Link imagen:</label>
+    <input [(ngModel)]="producto.imagen" (ngModelChange)="clearErrorMessage(); clearSuccesMessage()" class="focusColor" type="text"
+    id="imagen" name="imagen" required autocomplete="off" style="outline: none;">
+</div>
+<input type="button" class="btn btn-info" value="Guardar" style="color: white" (click)="CrearProducto()" />
+<label *ngIf="error" style="color: rgb(192, 0, 0); font-weight: bold;">{{error}}</label>
 </form>
+<div *ngIf="successMessage" class="d-flex justify-content-center">
+    <div class="alert alert-success mt-4" style="display: inline-block" role="alert">
+        Producto creado con exito!
+    </div>
+</div>

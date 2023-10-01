@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, collectionData } from '@angular/fire/firestore';
 import { Producto } from '../entidades/producto';
-import { Usuario } from '../entidades/usuario';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,15 +10,23 @@ export class ProductosService {
 
   constructor(private firestore: Firestore) { }
 
-  addProduct(product: Producto){
-    const productRef = collection(this.firestore, "productos");
-    return addDoc(productRef, {
-      
-    });
+  addProduct(product: Producto) {
+    try {
+      const productRef = collection(this.firestore, "productos");
+      return addDoc(productRef, {
+        id: product.id,
+        nombre: product.nombre,
+        precio: product.precio,
+        categoria: product.categoria,
+        imagen: product.imagen
+      });
+    } catch {
+      return "Error";
+    }
   }
 
-  addUsuario(usuario: Usuario){
-    const usuarioRef = collection(this.firestore, "usuarios");
-    return addDoc(usuarioRef, usuario);
+  getProductos(): Observable<Producto[]> {
+    const productosRef = collection(this.firestore, "productos");
+    return collectionData(productosRef, { idField: "id" }) as Observable<Producto[]>;
   }
 }

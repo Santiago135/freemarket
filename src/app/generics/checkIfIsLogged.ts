@@ -1,8 +1,11 @@
 export function CheckIfIsLogged() {
-    let logged = JSON.parse(sessionStorage.getItem("UsuarioLogueado") ?? "");
-    
-    if (logged != "")
-        return true;
-    else
+    let logged = ""
+    try {
+        logged = JSON.parse(sessionStorage.getItem("UsuarioLogueado") ?? "");
+    } catch (error) {
+
         return false;
+    }
+
+    return true;
 }

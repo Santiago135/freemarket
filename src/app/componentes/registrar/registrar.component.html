@@ -1,5 +1,8 @@
 <div class="parentDiv">
     <div class="login-container">
+        <div class="row" *ngIf="error!=''">
+            <label style="color: rgb(192, 0, 0); font-weight: bold;">{{error}}</label>
+        </div>
         <h2 style="color: white; font-weight: bold;">Registro</h2>
         <div class="row">
             <div class="col-md-6">
@@ -11,10 +14,10 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <input type="text" name="username" [(ngModel)]="usuario.nombre" autocomplete="off" required>
+                <input type="text" name="username" [(ngModel)]="usuario.nombre" (ngModelChange)="clearErrorMessage()" autocomplete="off" required>
             </div>
             <div class="col-md-6">
-                <input type="password" name="password" [(ngModel)]="usuario.password" required
+                <input type="password" name="password" [(ngModel)]="usuario.password" (ngModelChange)="clearErrorMessage()" required
                     appLengthchecker>
             </div>
         </div>
@@ -28,11 +31,11 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <input  type="password" name="password2" [(ngModel)]="password2" required appValidateSamePasswords
+                <input  type="password" name="password2" [(ngModel)]="password2" (ngModelChange)="clearErrorMessage()" required appValidateSamePasswords
                     [pass]="usuario.password">
             </div>
             <div class="col-md-6">
-                <input  type="text" name="direccion" [(ngModel)]="usuario.direccion" required autocomplete="off">
+                <input  type="text" name="direccion" [(ngModel)]="usuario.direccion" (ngModelChange)="clearErrorMessage()" required autocomplete="off">
             </div>
         </div>
         <div class="row">
@@ -45,17 +48,17 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <input  type="text" name="imagen" [(ngModel)]="usuario.imagen" required autocomplete="off">
+                <input  type="text" name="imagen" [(ngModel)]="usuario.imagen" (ngModelChange)="clearErrorMessage()" required autocomplete="off">
             </div>
             <div class="col-md-6">
-                <input type="date" name="fechaNac" [(ngModel)]="usuario.fechaNac" required autocomplete="off">
+                <input type="date" name="fechaNac" [(ngModel)]="usuario.fechaNac" (ngModelChange)="clearErrorMessage()" required autocomplete="off">
             </div>
         </div>
         <div class="row">
             <label style="color: white; font-weight: bold; display: flex; justify-content: center;" for="dni">DNI</label>
         </div>
         <div class="row">
-            <input type="number" name="dni" [(ngModel)]="usuario.dni" required autocomplete="off">
+            <input type="number" name="dni" [(ngModel)]="usuario.dni" (ngModelChange)="clearErrorMessage()" required autocomplete="off">
         </div>
         <div class="row" *ngIf="usuario.password == password2 && usuario.password != ''">
             <input type="button" [disabled]="usuario.nombre == '' || usuario.password == ''" class="btn btn-danger"
