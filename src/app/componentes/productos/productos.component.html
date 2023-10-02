@@ -1,6 +1,6 @@
-<div style="display: flex;">
+<div style="display: flex; height: 92.8vh;">
     <div class="col-2" style="background-color: rgba(0, 255, 21, 0.452); width: 250px; padding: 20px;">
-        <button class="btn btn-info" style="width: fit-content; color: white" (click)="CrearProducto()">+ Crear producto</button>
+        <button class="btn btn-info" style="width: fit-content; color: white;" (click)="CrearProducto()">+ Crear producto</button>
     </div>
 
     <div style="flex-grow: 1;">
@@ -10,7 +10,7 @@
             </div>
         </div>
         
-        <h2 class="justify-content-center d-flex" *ngIf="listaProductos.length != 0">No hay productos dados de alta</h2>
+        <h2 class="justify-content-center d-flex" *ngIf="listaProductos.length < 1">No hay productos dados de alta</h2>
         
         <div class="container mb-4">
             <div class="row">

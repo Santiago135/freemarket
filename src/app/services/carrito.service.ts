@@ -15,11 +15,11 @@ export class CarritoService {
     return this.carrito;
   }
 
-  private GetItemCant(id: number) {
+  private GetItemCant(id: string) {
     return this.carrito.filter((x: CarritoItem) => x.producto.id == id)[0].cantidad;
   }
 
-  private CheckIfItemExistsInCart(id: number) {
+  private CheckIfItemExistsInCart(id: string) {
     return this.carrito.filter((x: CarritoItem) => x.producto.id == id);
   }
 
@@ -39,7 +39,7 @@ export class CarritoService {
     alert("Producto añadido al carrito! Cantidad: " + this.GetItemCant(producto.id));
   }
 
-  public RemoveFromCart(productoId: number) {
+  public RemoveFromCart(productoId: string) {
     let itemCount = this.carrito.filter((x: CarritoItem) => x.producto.id == productoId)[0].cantidad;
 
     if (itemCount > 1) {

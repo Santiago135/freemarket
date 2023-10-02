@@ -13,7 +13,6 @@ export class ProductosComponent implements OnInit {
   public listaProductos: Producto[] = [];
 
   constructor(private router: Router, public carritoService: CarritoService, private productosService: ProductosService) {
-    // this.listaProductos = <Array<Producto>> JSON.parse(localStorage.getItem('productos')??"[]" );
   }
 
   ngOnInit(): void {
@@ -24,15 +23,16 @@ export class ProductosComponent implements OnInit {
     this.router.navigate(["crearproducto"]);
   }
 
-  public EliminarProducto(producto: Producto){
-    if(confirm("Estas seguro de eliminar este producto?")){
-      let idProducto:number = producto.id;
-  
-      let newList = this.listaProductos.filter(x => x.id != idProducto);
-
-      localStorage.setItem("productos", JSON.stringify(newList));
-      alert("Producto eliminado!");
-      location.reload();
+  public async EliminarProducto(producto: Producto) {
+    if (confirm("Estas seguro de eliminar este producto?")) {
+      const respuesta = await this.productosService.deleteProducto(producto);
+      
+      if(respuesta == "Error"){
+        alert("Ocurrió un error, por favor intente más tarde")
+      }
+      else{
+        alert("Producto eliminado!");
+      }
     }
   }
 
@@ -40,7 +40,7 @@ export class ProductosComponent implements OnInit {
     this.router.navigate(['/modificarproducto', value]);
   }
 
-  public AddToCart(producto: Producto){
+  public AddToCart(producto: Producto) {
     this.carritoService.AddToCart(producto);
   }
 }

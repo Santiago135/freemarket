@@ -40,18 +40,15 @@ export class CrearproductoComponent implements OnInit {
     else {
       this.error = "";
       this.producto.precio = parseInt(this.producto.precio.toString().replace(/[^0-9]/g, ''));
-      // let productosStorage: Producto[] = JSON.parse(localStorage.getItem("productos") ?? "[]");
       let productosCount = this.productos.length;
-      this.producto.id = productosCount + 1;
+      this.producto.id = (productosCount + 1).toString();
       const response = await this.productosService.addProduct(this.producto);
       if (response != "Error") {
         this.successMessage = true;
       }
-      // productosStorage.push(this.producto);
-
-      // localStorage.setItem("productos", JSON.stringify(productosStorage));
-
-      // alert("Producto creado con exito!");
+      else {
+        alert("Producto creado con exito!");
+      }
     }
   }
 
