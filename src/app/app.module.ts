@@ -29,6 +29,7 @@ import { AboutmeComponent } from './componentes/aboutme/aboutme.component';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { FaqComponent } from './faq/faq.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
     ModifyProductComponent,
     CarritoComponent,
     AboutmeComponent,
+    FaqComponent,
   ],
   imports: [
     BrowserModule,

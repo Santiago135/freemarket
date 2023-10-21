@@ -11,6 +11,7 @@ import { CrearproductoComponent } from './componentes/crearproducto/crearproduct
 import { ModifyProductComponent } from './componentes/modify-product/modify-product.component';
 import { CarritoComponent } from './componentes/carrito/carrito.component';
 import { AboutmeComponent } from './componentes/aboutme/aboutme.component';
+import { FaqComponent } from './faq/faq.component';
 
 const routes: Routes = [
   {path: "home", component: BienvenidoComponent, canActivate: [AuthGuardGuard]},
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: "productos", component: ProductosComponent, canActivate: [AuthGuardGuard]},
   {path: "carrito", component: CarritoComponent, canActivate: [AuthGuardGuard]},
   {path: "aboutme", component: AboutmeComponent, canActivate: [AuthGuardGuard]},
+  {path: "faq", component: FaqComponent, canActivate: [AuthGuardGuard]},
   {path: "", redirectTo: "/login", pathMatch: "full"},
   {path: "**", pathMatch: "full", component: ErrorComponent, canActivate: [AuthGuardGuard]}
 ];
