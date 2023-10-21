@@ -14,8 +14,13 @@ export class ModifyProductComponent implements OnInit {
   public producto: Producto = new Producto();
   public categorias: Categoria[] = [];
   private productos: Producto[] = [];
-  private errorMessage = "No pueden estar en blanco: ";
-  private empties = "";
+  public errorMessage = "No pueden estar en blanco: ";
+  public emptyMessage = "";
+  public showEmptyMessage = false;
+  public successMessage = false;
+  public empties = "";
+  public showError = false;
+  public error = "";
   private id: string = "";
 
   constructor(categoriesService: CategoriasService, private route: ActivatedRoute, private productsService: ProductosService, private router: Router) {
@@ -36,8 +41,10 @@ export class ModifyProductComponent implements OnInit {
   }
 
   public ModifyProducto() {
+    this.showEmptyMessage = false;
+    this.showError = false;
     if (!this.checkInputs()) {
-      alert(this.errorMessage + this.empties)
+      this.showEmptyMessage = true;
     }
     else {
       if (this.producto != undefined) {
@@ -46,15 +53,14 @@ export class ModifyProductComponent implements OnInit {
         let respuesta = this.productsService.modifyProducto(this.producto);
 
         if (respuesta != "Error") {
-          alert("Producto modificado con exito!");
-          this.router.navigate(['/productos']);
+          this.successMessage = true
         }
         else {
-          alert("Ocurrio un error, intente mas tarde");
+          this.showError = true;
         }
       }
       else {
-        alert("Ocurrio un error, intente mas tarde");
+        this.showError = true;
       }
     }
   }
@@ -89,6 +95,7 @@ export class ModifyProductComponent implements OnInit {
       isOk = false;
     }
 
+    this.emptyMessage = this.errorMessage + this.empties + "!";
     return isOk;
   }
 }

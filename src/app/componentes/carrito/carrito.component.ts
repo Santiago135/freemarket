@@ -12,6 +12,9 @@ export class CarritoComponent {
   public carrito: CarritoItem[] = [];
   public total: number = 0;
   private totales: number[] = [];
+  public showModal = false;
+  public selectedItem: Producto = new Producto();
+  public showModalDeleteItem = false;
 
   constructor(public carritoService: CarritoService) {
     this.UpdateCarritoPrice();
@@ -22,9 +25,15 @@ export class CarritoComponent {
     this.UpdateCarritoPrice();
   }
 
-  public RemoveItem(producto: Producto) {
-    this.carritoService.RemoveFromCart(producto.id);
+  public AskRemoveItem(producto: Producto){
+    this.selectedItem = producto;
+    this.showModalDeleteItem = true;
+  }
+
+  public RemoveItem() {
+    this.carritoService.RemoveFromCart(this.selectedItem.id);
     this.UpdateCarritoPrice();
+    this.showModalDeleteItem = false;
   }
 
   private UpdateCarritoPrice() {
@@ -34,7 +43,16 @@ export class CarritoComponent {
   }
 
   public VaciarCarrito(){
+    this.showModal = true;
+  }
+  
+  public ClearCarrito(){
     this.carritoService.ClearCart();
     location.reload();
+  }
+
+  public closeModal(){
+    this.showModal = false;
+    this.showModalDeleteItem = false;
   }
 }

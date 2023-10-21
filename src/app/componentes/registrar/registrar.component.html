@@ -1,9 +1,10 @@
 <div class="parentDiv">
     <div class="login-container">
+        <label *ngIf="showSuccess" style="color: rgb(0, 115, 192); font-weight: bold;">Usuario creado con exito!</label>
         <div class="row" *ngIf="error!=''">
             <label style="color: rgb(192, 0, 0); font-weight: bold;">{{error}}</label>
         </div>
-        <h2 style="color: white; font-weight: bold;">Registro</h2>
+        <h2 style="color: white; font-weight: bold;">{{loggedUser.tipoUsuario == 3 ? "Crear Usuario" : "Registrarse"}}</h2>
         <div class="row">
             <div class="col-md-6">
                 <label for="username" style="color: white; font-weight: bold;">Usuario</label>

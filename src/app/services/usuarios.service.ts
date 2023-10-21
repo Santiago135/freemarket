@@ -11,7 +11,6 @@ export class UsuariosService {
   constructor(private firestore: Firestore) { }
 
   addUsuario(usuario: Usuario) {
-    
     try {
       const usuarioRef = collection(this.firestore, "usuarios");
       return addDoc(usuarioRef, {
@@ -32,5 +31,9 @@ export class UsuariosService {
   getUsuarios(): Observable<Usuario[]> {
     const usuarioRef = collection(this.firestore, "usuarios");
     return collectionData(usuarioRef, { idField: "id" }) as Observable<Usuario[]>;
+  }
+
+  getLoggedUser = () => {
+    return JSON.parse(sessionStorage.getItem("UsuarioLogueado") ?? "");
   }
 }

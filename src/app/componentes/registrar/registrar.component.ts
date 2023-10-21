@@ -13,16 +13,19 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class RegistrarComponent implements OnInit {
   usuarios: Usuario[] = [];
+  loggedUser: Usuario = new Usuario();
 
   public usuario = new Usuario();
   public password2 = "";
   private errorMessage = "No puede estar en blanco: ";
   private empties = "";
+  public showSuccess = false;
 
   public error = "";
 
   public clearErrorMessage = () => {
     this.error = "";
+    this.showSuccess = false;
   }
 
   public async registrar() {
@@ -39,29 +42,12 @@ export class RegistrarComponent implements OnInit {
         this.error = "";
         const response = await this.userService.addUsuario(this.usuario);
         if(response != "Error"){
-              if(!CheckIfIsLogged()){
-                this.route.navigateByUrl("login");
-              }
-              else{
-                alert("Usuario creado con exito!");
-              }
+          this.showSuccess = true
         }
         else{
           this.error = "No se pudo crear el usuario, intente mas tarde";
         }
       }
-      // this.http.post<any>("http://localhost:7200/register", this.usuario)
-      // .subscribe(data => {
-      //   if (data.success) {
-      //     alert("Usuario creado con exito!");
-      //     if(!CheckIfIsLogged()){
-      //       this.route.navigateByUrl("login");
-      //     }
-      //   }
-      //   else {
-      //     alert(data.message);
-      //   }
-      // });
     }
   }
 
@@ -102,6 +88,7 @@ export class RegistrarComponent implements OnInit {
   }
   ngOnInit(): void {
     this.userService.getUsuarios().subscribe(users => this.usuarios = users);
+    this.loggedUser = this.userService.getLoggedUser();
   }
 
 }

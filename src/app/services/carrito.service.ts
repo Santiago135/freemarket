@@ -36,7 +36,7 @@ export class CarritoService {
     }
 
     localStorage.setItem("carrito", JSON.stringify(this.carrito));
-    alert("Producto añadido al carrito! Cantidad: " + this.GetItemCant(producto.id));
+    return this.GetItemCant(producto.id);
   }
 
   public RemoveFromCart(productoId: string) {
@@ -47,20 +47,16 @@ export class CarritoService {
       localStorage.setItem("carrito", JSON.stringify(this.carrito));
     }
     else if (itemCount == 1) {
-      if (confirm("Estas seguro de eliminar este item del carrito?")) {
         let index = this.carrito.findIndex((x: CarritoItem) => x.producto.id === productoId);
         if (index !== -1) {
           this.carrito.splice(index, 1);
           localStorage.setItem("carrito", JSON.stringify(this.carrito));
-        }
       }
     }
   }
 
   public ClearCart() {
-    if (confirm("Estas seguro de vaciar el carrito?")) {
       this.carrito = [];
       localStorage.setItem("carrito", JSON.stringify(this.carrito));
-    }
   }
 }

@@ -10,6 +10,9 @@ export class ProductoComponent {
   @Input("producto")
   public producto: Producto;
 
+  @Input("tipoUsuario")
+  public tipoUsuario: number = 0;
+
   @Output() 
   public eliminar =new  EventEmitter();
 

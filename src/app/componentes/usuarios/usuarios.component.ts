@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/entidades/usuario';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -11,21 +12,16 @@ import { Usuario } from 'src/app/entidades/usuario';
 })
 export class UsuariosComponent {
   public listaUsuarios: Array<Usuario> = [];
+  public usuario: Usuario = new Usuario();
 
-  constructor(private router: Router, public http: HttpClient) {
-    this.http.get<any>("http://localhost:7200/usuarios")
-      .subscribe(data => {
-        if (data.success) {
-          console.log(data)
-          this.listaUsuarios = data.data;
-        }
-        else{
-          console.log(data.message)
-        }
-      });
+  constructor(private router: Router, public http: HttpClient, private userService: UsuariosService) {
+    this.usuario = userService.getLoggedUser();
+    userService.getUsuarios().subscribe(usuarios => {
+      this.listaUsuarios = usuarios;
+    })
   }
 
-  public CrearUsuario(){
+  public CrearUsuario() {
     this.router.navigate(["registrar"]);
   }
 }

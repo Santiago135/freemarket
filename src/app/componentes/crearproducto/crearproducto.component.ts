@@ -46,9 +46,6 @@ export class CrearproductoComponent implements OnInit {
       if (response != "Error") {
         this.successMessage = true;
       }
-      else {
-        alert("Producto creado con exito!");
-      }
     }
   }
 

@@ -1,16 +1,25 @@
-<div class="row" style="padding: 5px; overflow-x: hidden; width: 100%;">
-    <div class="col-1">
-        <h2>Usuarios</h2>
-    </div>
-    <div class="col-2">
-        <button class="btn btn-success" style="width: fit-content;" (click)="CrearUsuario()">Crear usuario</button>
+<div class="" style="padding: 5px; overflow-x: hidden; width: 100%; display: flex;">
+    <div class="row" style="padding: 5px; overflow-x: hidden; width: 100%;">
+        <div class="col-12 justify-content-center d-flex">
+            <h2 *ngIf="usuario.tipoUsuario == 3">Usuarios</h2>
+            <h2 *ngIf="usuario.tipoUsuario != 3">Mi Perfil</h2>
+        </div>
+        <div *ngIf="usuario.tipoUsuario != 3" class="col-2">
+            <button class="btn btn-success" style="width: fit-content;" (click)="CrearUsuario()">Crear usuario</button>
+        </div>
     </div>
 </div>
 
-<div class="container">
+<div class="container" *ngIf="usuario.tipoUsuario == 3">
     <div class="row">
         <div *ngFor="let user of this.listaUsuarios" class="col-2">
             <app-usuario [user]="user" ></app-usuario>
         </div>
+    </div>
+</div>
+
+<div class="row" style="width: 100%;  overflow-x: hidden;" *ngIf="usuario.tipoUsuario != 3">
+    <div *ngFor="let user of this.listaUsuarios" class="col-12" style="justify-content: center; display: flex;">
+        <app-usuario *ngIf="user.id == usuario.id" [user]="user"></app-usuario>
     </div>
 </div>

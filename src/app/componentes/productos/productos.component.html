@@ -1,6 +1,13 @@
-<div style="display: flex; height: 92.8vh;">
-    <div class="col-2" style="background-color: rgba(0, 255, 21, 0.452); width: 250px; padding: 20px;">
-        <button class="btn btn-info" style="width: fit-content; color: white;" (click)="CrearProducto()">+ Crear producto</button>
+<div style="display: flex; height: 100%;">
+    <div id="barraLateral" class="col-2" style="background-color: rgba(0, 255, 21, 0.452); width: 250px; padding: 20px;">
+        <button *ngIf="userType == 3" class="btn btn-info" style="width: fit-content; color: white; font-weight: bold;" (click)="CrearProducto()">+ Crear producto</button>
+        <div style="margin-top: 8px; margin-bottom: 12px;">
+            <input type="text" class="form-control" placeholder="Buscar Producto" [(ngModel)]="productsFilter" (ngModelChange)="filterProducts()"/>
+        </div>
+        <div *ngFor="let cat of categorias">
+            <input type="checkbox" (change)="toggleCategorySelection(cat.id)" />
+            <small style="color: rgb(0, 183, 255); font-weight: bold; margin-left: 4px;">{{cat.nombre}}</small>
+        </div>
     </div>
 
     <div style="flex-grow: 1;">
@@ -9,18 +16,54 @@
                 <h2>Productos</h2>
             </div>
         </div>
-        
+
         <h2 class="justify-content-center d-flex" *ngIf="listaProductos.length < 1">No hay productos dados de alta</h2>
-        
+
         <div class="container mb-4">
             <div class="row">
-                <div *ngFor="let producto of this.listaProductos" class="col-2">
-                    <app-producto [producto]="producto" 
-                    (eliminar)="EliminarProducto(producto)" 
-                    (modificar)="ModificarProducto(producto.id)"
-                    (addItemToCart)="AddToCart(producto)"></app-producto>
+                <div *ngFor="let producto of this.filteredProducts" class="col-2">
+                    <app-producto [producto]="producto" [tipoUsuario]="userType" (eliminar)="EliminarProducto(producto)"
+                        (modificar)="ModificarProducto(producto.id)"
+                        (addItemToCart)="AddToCart(producto)"></app-producto>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal " id="modal" style="display: block;" *ngIf="showModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Eliminar producto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="closeModal()"></button>
+            </div>
+            <div class="modal-body">
+                ¿Esta seguro que desea eliminar este producto?<br/>
+                <small style="color: gray;">Esta accion no se puede deshacer!</small>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">Cancelar</button>
+                <button type="button" class="btn btn-primary" (click)="Eliminar()">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="showDeleted" class="" style="position: absolute; left: 50%; top: 50%">
+    <div class="d-flex justify-content-center">
+        <div class="alert alert-success mt-4" style="display: inline-block" role="alert">
+            Producto eliminado con exito!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" (click)="closeAlert()"></button>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="showAdded" class="" style="position: absolute; left: 50%; top: 50%">
+    <div class="d-flex justify-content-center">
+        <div class="alert alert-info mt-4" style="display: inline-block" role="alert">
+            Producto agregado con exito! Cantidad en el carrito: {{quantity}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" (click)="closeAlert()"></button>
         </div>
     </div>
 </div>
