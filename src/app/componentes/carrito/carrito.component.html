@@ -1,4 +1,5 @@
-<div class="container" style="margin-top: 10px;">
+<div class="container" style="margin-top: 10px;" #contenido>
+    <img *ngIf="printingPDF" src="../../../assets/freemarketlogo.png" alt="Logo de freemarket" />
     <table class="carrito-table" *ngIf="this.total > 0">
         <thead>
             <tr style="background-color: #05c988;">
@@ -13,10 +14,13 @@
                 <td class="producto">{{ item.producto.nombre }}</td>
                 <td class="precio">${{ item.producto.precio | showPrice}}</td>
                 <td class="cantidad">
-                    <div class="row">
+                    <div class="row" *ngIf="!printingPDF">
                         {{ item.cantidad }}
                         <div class="botonRemove focusColorRemove" (click)="AskRemoveItem(item.producto)">-</div>
                         <div class="botonAdd focusColorAdd" (click)="AddItem(item.producto)">+</div>
+                    </div>
+                    <div *ngIf="printingPDF">
+                        {{ item.cantidad }}
                     </div>
                 </td>
                 <td class="total" style="display: flex; justify-content: end;">${{ item.producto.precio *
@@ -25,13 +29,14 @@
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="3"><button class="btn clearCart" (click)="VaciarCarrito()">Vaciar</button></td>
+                <td colspan="3"><button class="btn clearCart" (click)="VaciarCarrito()" *ngIf="!printingPDF">Vaciar</button></td>
                 <td class="totalTotal" style="font-weight: bold;">Total: ${{ this.total | showPrice }}</td>
             </tr>
         </tfoot>
     </table>
     <h2 *ngIf="this.total <= 0" style="display: flex; justify-content: center;">El carrito esta vacio</h2>
 </div>
+<button (click)="exportToPDF()" class="btn btn-info">Generar PDF</button>
 
 <div class="modal " id="modal" style="display: block;" *ngIf="showModal">
     <div class="modal-dialog">
@@ -41,16 +46,18 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="closeModal()"></button>
             </div>
             <div class="modal-body">
-                ¿Esta seguro que desea vaciar el carrito?<br/>
+                ¿Esta seguro que desea vaciar el carrito?<br />
                 <small style="color: gray;">Esta accion no se puede deshacer!</small>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-bs-dismiss="modal" (click)="closeModal()">Cancelar</button>
+                <button type="button" class="btn btn-default" data-bs-dismiss="modal"
+                    (click)="closeModal()">Cancelar</button>
                 <button type="button" class="btn btn-danger" (click)="ClearCarrito()">Vaciar</button>
             </div>
         </div>
     </div>
 </div>
+
 
 <div class="modal " id="modal" style="display: block;" *ngIf="showModalDeleteItem">
     <div class="modal-dialog">
@@ -60,11 +67,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="closeModal()"></button>
             </div>
             <div class="modal-body">
-                ¿Esta seguro que desea eliminar este item del carrito?<br/>
+                ¿Esta seguro que desea eliminar este item del carrito?<br />
                 <small style="color: gray;">Para agregarlo otra vez debere ir a "Productos"!</small>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-bs-dismiss="modal" (click)="closeModal()">Cancelar</button>
+                <button type="button" class="btn btn-default" data-bs-dismiss="modal"
+                    (click)="closeModal()">Cancelar</button>
                 <button type="button" class="btn btn-danger" (click)="RemoveItem()">Vaciar</button>
             </div>
         </div>
